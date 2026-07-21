@@ -9,18 +9,20 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
 
-interface RegisterForm {
+type RegisterForm = {
     name: string;
     email: string;
     password: string;
     password_confirmation: string;
-}
+    role: string;
+};
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm<RegisterForm>({
         name: '',
         email: '',
         password: '',
+        role: 'chef',
         password_confirmation: '',
     });
 
@@ -36,6 +38,36 @@ export default function Register() {
             <Head title="Register" />
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
+                    <div className="grid gap-2">
+                        <Label>I am a</Label>
+                        <div className="grid grid-cols-2 gap-2">
+                            <button
+                                type="button"
+                                onClick={() => setData('role', 'chef')}
+                                className={`rounded-md border p-3 text-sm font-medium transition-colors ${
+                                    data.role === 'chef'
+                                        ? 'border-primary bg-primary text-primary-foreground'
+                                        : 'border-input bg-background hover:bg-accent'
+                                }`}
+                            >
+                                👨‍🍳 Chef
+                                <span className="block text-xs font-normal opacity-80">I want to rent kitchens</span>
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setData('role', 'owner')}
+                                className={`rounded-md border p-3 text-sm font-medium transition-colors ${
+                                    data.role === 'owner'
+                                        ? 'border-primary bg-primary text-primary-foreground'
+                                        : 'border-input bg-background hover:bg-accent'
+                                }`}
+                            >
+                                🏠 Kitchen Owner
+                                <span className="block text-xs font-normal opacity-80">I want to list my kitchen</span>
+                            </button>
+                        </div>
+                        <InputError message={errors.role} />
+                    </div>
                     <div className="grid gap-2">
                         <Label htmlFor="name">Name</Label>
                         <Input
