@@ -121,7 +121,7 @@ export default function KitchenForm({ kitchen }: { kitchen?: Kitchen }) {
                         {kitchen.images.map((img) => (
                             <img
                                 key={img.id}
-                                src={`/storage/${img.path}`}
+                                src={img.url}
                                 alt=""
                                 className="h-16 w-24 rounded-md border object-cover"
                             />

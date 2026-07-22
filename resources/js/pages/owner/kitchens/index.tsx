@@ -46,7 +46,7 @@ export default function MyKitchens({ kitchens }: Props) {
                                 <div className="bg-muted aspect-video">
                                     {kitchen.images[0] ? (
                                         <img
-                                            src={`/storage/${kitchen.images[0].path}`}
+                                            src={kitchen.images[0].url}
                                             alt={kitchen.name}
                                             className="h-full w-full object-cover"
                                         />

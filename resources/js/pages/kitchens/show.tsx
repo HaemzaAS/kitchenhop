@@ -28,7 +28,7 @@ export default function KitchenShow({ kitchen }: Props) {
                         <div className="bg-muted aspect-video overflow-hidden rounded-xl border">
                             {images.length > 0 ? (
                                 <img
-                                    src={`/storage/${images[active].path}`}
+                                    src={images[active].url}
                                     alt={kitchen.name}
                                     className="h-full w-full object-cover"
                                 />
@@ -46,7 +46,7 @@ export default function KitchenShow({ kitchen }: Props) {
                                             i === active ? 'border-primary' : 'border-transparent'
                                         }`}
                                     >
-                                        <img src={`/storage/${img.path}`} alt="" className="h-full w-full object-cover" />
+                                        <img src={img.url} alt="" className="h-full w-full object-cover" />
                                     </button>
                                 ))}
                             </div>

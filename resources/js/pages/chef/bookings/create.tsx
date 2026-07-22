@@ -59,7 +59,7 @@ export default function CreateBooking({ kitchen }: Props) {
                 <div className="mt-4 flex items-center gap-3 rounded-xl border p-4">
                     <div className="bg-muted h-14 w-20 shrink-0 overflow-hidden rounded-md">
                         {kitchen.images[0] ? (
-                            <img src={`/storage/${kitchen.images[0].path}`} alt="" className="h-full w-full object-cover" />
+                            <img src={kitchen.images[0].url} alt="" className="h-full w-full object-cover" />
                         ) : (
                             <div className="flex h-full items-center justify-center text-xl">🍳</div>
                         )}

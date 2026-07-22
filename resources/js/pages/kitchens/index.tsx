@@ -25,7 +25,7 @@ function KitchenCard({ kitchen }: { kitchen: Kitchen }) {
             <div className="bg-muted aspect-video w-full overflow-hidden">
                 {cover ? (
                     <img
-                        src={`/storage/${cover.path}`}
+                        src={cover.url}
                         alt={kitchen.name}
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />

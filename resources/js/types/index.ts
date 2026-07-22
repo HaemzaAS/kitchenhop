@@ -44,6 +44,7 @@ export interface KitchenImage {
     id: number;
     kitchen_id: number;
     path: string;
+    url: string;
 }
 
 export interface Kitchen {
