@@ -21,4 +21,9 @@ class Kitchen extends Model
     {
         return $this->hasMany(KitchenImage::class);
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

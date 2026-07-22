@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem, type Kitchen, type SharedData } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { CalendarClock, MapPin, User as UserIcon } from 'lucide-react';
 import { useState } from 'react';
 
@@ -72,8 +72,10 @@ export default function KitchenShow({ kitchen }: Props) {
                         </div>
 
                         {auth.user.role === 'chef' && (
-                            <Button size="lg" className="w-full" disabled title="Booking is coming in the next phase">
-                                <CalendarClock className="mr-1 h-4 w-4" /> Book this kitchen
+                            <Button size="lg" className="w-full" asChild>
+                                <Link href={route('bookings.create', kitchen.id)}>
+                                    <CalendarClock className="mr-1 h-4 w-4" /> Book this kitchen
+                                </Link>
                             </Button>
                         )}
                     </div>
