@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\KitchenController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('kitchens/{kitchen}/book', [BookingController::class, 'create'])->name('bookings.create');
         Route::post('bookings', [BookingController::class, 'store'])->name('bookings.store');
         Route::get('my-bookings', [BookingController::class, 'index'])->name('bookings.index');
+    });
+
+    // Admin overview.
+    Route::middleware('role:admin')->group(function () {
+        Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
     });
 
     // Status transitions (approve/reject by owner, cancel by chef) — authorized in the policy.

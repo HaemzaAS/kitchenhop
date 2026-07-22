@@ -3,7 +3,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { CalendarDays, ChefHat, Inbox, LayoutGrid, Store } from 'lucide-react';
+import { CalendarDays, ChefHat, Inbox, LayoutGrid, ShieldCheck, Store } from 'lucide-react';
 import AppLogo from './app-logo';
 
 export function AppSidebar() {
@@ -41,6 +41,15 @@ export function AppSidebar() {
                       title: 'Booking Requests',
                       url: '/booking-requests',
                       icon: Inbox,
+                  },
+              ]
+            : []),
+        ...(role === 'admin'
+            ? [
+                  {
+                      title: 'Admin',
+                      url: '/admin',
+                      icon: ShieldCheck,
                   },
               ]
             : []),
