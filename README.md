@@ -110,4 +110,7 @@ Open http://localhost:8000 and log in with any demo account above. The seeder cr
 
 ## AI tools used
 
-This project was built with **Claude (Anthropic)** as an AI pair programmer, used for: project planning and time-boxing, generating boilerplate (controllers, policies, React pages), debugging deployment issues, and reviewing security considerations. All AI-generated code was reviewed, tested end-to-end (local + live), and committed incrementally by me — the git history reflects the actual build order. Environment setup, testing, deployment operations and all product decisions were done manually.
+- **Gemini (Google)** — used at the start to create the work map: breaking the requirements down into phases and time-boxing the 24 hours.
+- **Claude (Anthropic)** — used as a code assistant throughout the build: generating boilerplate (controllers, policies, React pages), debugging errors, and helping troubleshoot deployment.
+
+All AI-generated code was reviewed, tested end-to-end (locally and on the live deployment), and committed incrementally — the git history reflects the actual build order. Environment setup, testing, deployment operations and product decisions were done manually.
