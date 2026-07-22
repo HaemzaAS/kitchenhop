@@ -60,6 +60,24 @@ export interface Kitchen {
     updated_at: string;
 }
 
+export type BookingStatus = 'pending' | 'approved' | 'rejected' | 'cancelled';
+
+export interface Booking {
+    id: number;
+    user_id: number;
+    kitchen_id: number;
+    date: string;
+    start_time: string;
+    end_time: string;
+    hours: string;
+    total_price: string;
+    status: BookingStatus;
+    kitchen?: Pick<Kitchen, 'id' | 'name' | 'city'>;
+    chef?: Pick<User, 'id' | 'name' | 'email'>;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface PaginationLink {
     url: string | null;
     label: string;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\KitchenController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,7 +25,20 @@ Route::middleware(['auth'])->group(function () {
         Route::get('kitchens/{kitchen}/edit', [KitchenController::class, 'edit'])->name('kitchens.edit');
         Route::put('kitchens/{kitchen}', [KitchenController::class, 'update'])->name('kitchens.update');
         Route::delete('kitchens/{kitchen}', [KitchenController::class, 'destroy'])->name('kitchens.destroy');
+
+        // Incoming booking requests for the owner's kitchens.
+        Route::get('booking-requests', [BookingController::class, 'requests'])->name('bookings.requests');
     });
+
+    // Booking creation is restricted to chefs.
+    Route::middleware('role:chef')->group(function () {
+        Route::get('kitchens/{kitchen}/book', [BookingController::class, 'create'])->name('bookings.create');
+        Route::post('bookings', [BookingController::class, 'store'])->name('bookings.store');
+        Route::get('my-bookings', [BookingController::class, 'index'])->name('bookings.index');
+    });
+
+    // Status transitions (approve/reject by owner, cancel by chef) — authorized in the policy.
+    Route::patch('bookings/{booking}', [BookingController::class, 'update'])->name('bookings.update');
 
     // Keep this after "kitchens/create" so the literal route wins over the wildcard.
     Route::get('kitchens/{kitchen}', [KitchenController::class, 'show'])->name('kitchens.show');
