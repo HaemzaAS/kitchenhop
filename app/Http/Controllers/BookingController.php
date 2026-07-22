@@ -116,6 +116,25 @@ class BookingController extends Controller
             return back()->withErrors(['status' => 'Only pending bookings can be updated.']);
         }
 
+        // Approving must not double-book the kitchen against an already-approved slot.
+        if ($validated['status'] === 'approved') {
+            $overlaps = Booking::query()
+                ->where('kitchen_id', $booking->kitchen_id)
+                ->where('id', '!=', $booking->id)
+                ->whereDate('date', $booking->date)
+                ->where('status', 'approved')
+                ->where(fn ($q) => $q
+                    ->where('start_time', '<', $booking->end_time)
+                    ->where('end_time', '>', $booking->start_time))
+                ->exists();
+
+            if ($overlaps) {
+                return back()->withErrors([
+                    'status' => 'This request overlaps a booking you already approved for that kitchen.',
+                ]);
+            }
+        }
+
         $booking->update(['status' => $validated['status']]);
 
         return back()->with('success', "Booking {$validated['status']}.");
